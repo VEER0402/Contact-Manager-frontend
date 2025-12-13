@@ -1,0 +1,67 @@
+<div class="container">
+  <h1 class="title">📇 Contact Manager</h1>
+
+  <div class="actions">
+ <button class="add-btn" (click)="openAddModal()">
+  <span class="plus">+</span>
+ {{ isEditMode ? 'Updating Contact' : 'Add Contact' }}
+</button>
+
+  </div>
+
+  <table class="contacts-table">
+    <thead>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Company</th>
+        <th>Note</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of contacts">
+        <!-- <td>{{ c.id }}</td> -->
+        <td>{{ c.name }}</td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.phone }}</td>
+        <td>{{ c.company }}</td>
+        <td>{{ c.note }}</td>
+        <td>
+          <button class="btn small edit" (click)="editContact(c)">Edit</button>
+          <button class="btn small danger" (click)="deleteContact(c.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Add Contact Modal -->
+<div class="modal-backdrop" *ngIf="showAddModal">
+  <div class="modal">
+    <h2>{{ isEditMode ? 'Update Contact' : 'Add Contact' }}</h2>
+
+    <input type="text" placeholder="Name"
+      [(ngModel)]="newContact.name">
+
+    <input type="email" placeholder="Email"
+      [(ngModel)]="newContact.email">
+
+    <input type="text" placeholder="Phone"
+      [(ngModel)]="newContact.phone">
+
+    <input type="text" placeholder="Company"
+      [(ngModel)]="newContact.company">
+
+    <textarea placeholder="Note"
+      [(ngModel)]="newContact.note"></textarea>
+
+    <div class="modal-actions">
+      <button class="save-btn" (click)="addContact()">{{ isEditMode ? 'Update Contact' : 'Add Contact' }}</button>
+      <button class="cancel-btn" (click)="closeAddModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+</div>
